@@ -10,11 +10,19 @@ public class Application {
     private Scanner sc = Container.sc;
     private boolean isActive = true;
 
+    private String applicationName;
+
+    public Application(String applicationName){
+        this.applicationName = applicationName;
+    }
+
     public void run(){
 
         while(isActive){
 
-            System.out.println("명령어) ");
+            String domain = "https://" + applicationName;
+
+            System.out.print(domain);
             String inputUri = sc.nextLine().trim();
 
             Request request = new Request(inputUri);
@@ -31,11 +39,15 @@ public class Application {
 
     }
 
+    // /members
     public Controller getController(String code){
 
         switch (code){
             case "system":
                 return Container.systemController;
+            case "member" :
+            case "members" :
+                return Container.memberController;
             default:
                 return null;
         }
